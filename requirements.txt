@@ -1,0 +1,10 @@
+numpy==1.19.2
+pandas==1.2.4
+matplotlib==3.0.2
+tensorflow==2.5.0
+keras==2.4.3
+gensim==3.4.0
+janome==0.3.7
+pykakasi==2.0.1
+click==7.1.2
+pygram11==0.10.3

@@ -1,0 +1,9 @@
+.spam
+.vscode
+.DS_Store
+old
+model
+dataset/*
+utils/__pycache__
+utils/aozora_samples
+utils/txt_data
