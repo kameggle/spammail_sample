@@ -4,7 +4,7 @@ for Signate 104: https://signate.jp/competitions/104
 
 ## readme
 
-- please put signate_DL_datasets in ./dataset
+- please put signate_DL_datasets in ./dataset/
 
 ### using virtualenv
 

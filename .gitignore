@@ -1,3 +1,4 @@
+__pycache__
 .spam
 .vscode
 .DS_Store
@@ -7,3 +8,5 @@ dataset/*
 utils/__pycache__
 utils/aozora_samples
 utils/txt_data
+
+predict.py

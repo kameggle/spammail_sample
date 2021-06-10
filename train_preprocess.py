@@ -53,22 +53,23 @@ def make_basedata(text_dict, master_path):
     return merged_df
 
 
-def make_csv(merged_df):
+def make_csv(merged_df, file_name):
     os.makedirs(SAVE_PATH, exist_ok=True)
-    submit_name = '{}basedata.csv'.format(SAVE_PATH)
+    submit_name = '{}{}.csv'.format(SAVE_PATH, file_name)
     merged_df.to_csv(submit_name, index=False)
 
 
 @click.command()
 @click.option('--data_path', '-d', default='./dataset/train2/')
 @click.option('--master_path', '-m', default='./dataset/train_master.tsv')
-def main(data_path, master_path):
+@click.option('--file_name', '-n', default='basedata')
+def main(data_path, master_path, file_name):
     nltk.download('stopwords')
     text_name = glob.glob('{}*'.format(data_path))
     textfiles = set(text_name)
     text_dict = make_textdict(textfiles, data_path)
     merged_df = make_basedata(text_dict, master_path)
-    make_csv(merged_df)
+    make_csv(merged_df, file_name)
 
 
 if __name__ == '__main__':

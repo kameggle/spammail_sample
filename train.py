@@ -16,20 +16,26 @@ BATCH_SIZE = 32
 EPOCHS = 5
 
 
-@click.command()
-@click.option('--data_path', '-d', default='./dataset/basedata.csv')
-def main(data_path):
-    origin_df = pd.read_csv(data_path)
-    drop_df = origin_df.dropna()
-
-    y = drop_df['label'].values
+def tokenize_text(drop_df):
     list_sentences = drop_df['mail']
 
     tokenizer = Tokenizer(num_words=MAX_FEATURES)
     tokenizer.fit_on_texts(list(list_sentences))
     list_tokenized_mails = tokenizer.texts_to_sequences(list_sentences)
 
+    return list_tokenized_mails
+
+
+@click.command()
+@click.option('--data_path', '-d', default='./dataset/basedata.csv')
+def main(data_path):
+    origin_df = pd.read_csv(data_path)
+    drop_df = origin_df.dropna()
+
+    list_tokenized_mails = tokenize_text(drop_df)
+
     X_train = pad_sequences(list_tokenized_mails, maxlen=MAX_LEN)
+    y = drop_df['label'].values
 
     inp = Input(shape=(MAX_LEN, ))
     x = Embedding(MAX_FEATURES, EMBED_SIZE)(inp)
