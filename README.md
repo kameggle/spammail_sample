@@ -8,8 +8,8 @@ for Signate 104: https://signate.jp/competitions/104
 
 ### using venv
 
-- `python3 -m venv .venv` in spammail
-- `source .venv/bin/activate`
+- `python3 -m venv .spam` in spammail_sample
+- `source .spam/bin/activate`
 - `pip3 install --upgrade pip`
 - `pip3 install -r requirements.txt`
 - run `train_preprocess.py` to make train_preprocess data
@@ -20,15 +20,13 @@ for Signate 104: https://signate.jp/competitions/104
 
 ```
 spammail_sample
+  ├── README.md
+  |── requirements.txt
+  |── dataset/
+  |     └── (please put datasets)
   |── train_preprocess.py
   |── train.py
   |── test_preprocess.py
-  |
-  |── requirements.txt
-  |
-  |── dataset/
-  |     └── (please put datasets)
-  |
   └── utils/
         └── del_words.txt
 ```
