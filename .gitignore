@@ -6,7 +6,6 @@ old
 model
 dataset/*
 utils/__pycache__
-utils/aozora_samples
-utils/txt_data
+.gitignore
 
 predict.py
