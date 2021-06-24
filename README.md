@@ -5,6 +5,7 @@ for Signate 104: https://signate.jp/competitions/104
 ## readme
 
 - please put signate_DL_datasets in ./dataset/
+- before PR, please check this page: https://backlog.com/ja/git-tutorial/pull-request/
 
 ### using venv
 
@@ -12,9 +13,9 @@ for Signate 104: https://signate.jp/competitions/104
 - `source .spam/bin/activate`
 - `pip3 install --upgrade pip`
 - `pip3 install -r requirements.txt`
-- run `train_preprocess.py` to make train_preprocess data
-- run `train.py` to make models
-- run `test_preprocess.py` to make test_preprocess data
+- run `python3 train_preprocess.py` to make train_preprocess data
+- run `python3 train.py` to make models
+- run `python3 test_preprocess.py` to make test_preprocess data
 
 ## directry
 

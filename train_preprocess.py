@@ -3,16 +3,13 @@ import os
 import pandas as pd
 import re
 
-import nltk
-from nltk.corpus import stopwords
-
 import click
+
+from utils.nltk_download import make_stopwords
 
 SAVE_PATH = './dataset/'
 DEL_WORDS = './utils/del_words.txt'
-NUM_LIST = set(list(range(1, 10)))
-SYM_LIST = ['/', '>', ';', ':', '-']
-STOP_WORDS = set(stopwords.words('english'))
+STOP_WORDS = make_stopwords()
 
 
 def make_textdict(textfiles, data_path):
@@ -23,22 +20,16 @@ def make_textdict(textfiles, data_path):
     text_dict = {}
 
     for text in textfiles:
-        with open(text, mode="r", encoding="utf-8") as mail:
+        with open(text, mode='r', encoding='utf-8') as mail:
             mail = str.lower(mail.read())
             for i in del_set:
-                mail = re.sub(".*{}.*\n".format(i), "",
-                              mail, flags=re.MULTILINE)
-            for i in NUM_LIST:
-                mail = re.sub("{}".format(i), "",
-                              mail, flags=re.MULTILINE)
-            for i in SYM_LIST:
-                mail = re.sub("{} ".format(i), "",
-                              mail, flags=re.MULTILINE)
+                mail = re.sub(f'.*{i}.*\n', ' ', mail, flags=re.MULTILINE)
             for i in STOP_WORDS:
-                mail = re.sub(" {} ".format(i), " ",
-                              mail, flags=re.MULTILINE)
-            mail = re.sub("\n", " ", mail, flags=re.MULTILINE)
-            text = re.sub("{}".format(data_path), "", text)
+                mail = re.sub(f' {i} ', ' ', mail, flags=re.MULTILINE)
+            mail = re.sub('[^a-z]', ' ', mail, flags=re.MULTILINE)
+            mail = re.sub('\n', ' ', mail, flags=re.MULTILINE)
+            mail = re.sub(r'\s+', ' ', mail, flags=re.MULTILINE)
+            text = re.sub(f'{data_path}', '', text)
             text_dict[text] = mail
 
     return text_dict
@@ -64,7 +55,6 @@ def make_csv(merged_df, file_name):
 @click.option('--master_path', '-m', default='./dataset/train_master.tsv')
 @click.option('--file_name', '-n', default='basedata')
 def main(data_path, master_path, file_name):
-    nltk.download('stopwords')
     text_name = glob.glob('{}*'.format(data_path))
     textfiles = set(text_name)
     text_dict = make_textdict(textfiles, data_path)
